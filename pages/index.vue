@@ -44,22 +44,23 @@ const { data } = await useFetch('https://api.tnptrading.fr/email-fashion-night')
   <h1 class="text-end me-6 text-6xl lg:text-8xl mt-8 cardinal">the fashion night</h1>
   <div class="flex justify-center mt-16">
     <div class="bg-black movie">
-      <video class="w-full h-full" src="/img/video.webm" autoplay muted loop></video>
+      <video class="w-full h-full" src="/img/video.mp4" autoplay muted loop></video>
     </div>
     <nuxt-img class="z-10 w-11/12 lg:w-2/3" src="/img/ecran.webp"></nuxt-img>
   </div>
-  <h2 class="text-center text-5xl mt-32 cardinal">Save the date :</h2>
+  <h2 class="text-center text-5xl mt-32 cardinal mx-2">Save the date :</h2>
   <p class="text-center text-4xl mt-4 cardinal">Calendrier officiel, 22 mars 2025</p>
-  <h1 class="cardinal text-center text-5xl mt-32 mb-4">Lookbook à venir</h1>
+
+  <h1 class="cardinal text-center text-5xl mt-32 mb-4 mx-2">Lookbook à venir</h1>
   <p class="cardinal text-4xl text-center mb-32">Restez connectés</p>
 
-  <h2 class="text-center text-5xl mt-32 cardinal">Préréservez dès maintenant :</h2>
+  <h2 class="text-center text-4xl lg:text-5xl mx-2 mt-32 cardinal">Préréservez dès maintenant :</h2>
   <form @submit.prevent="submitForm" v-show="!send">
     <div class="flex justify-center mt-8 gap-x-4 mb-4">
-      <input class="h-12 w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="email"
+      <input class="h-12 w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="email"
              placeholder="votre adresse email" id="email" name="email" v-model="email">
     </div>
-    <p class="text-center mb-4">*Votre email est uniquement utilisée pour vous contacter.<br>Elle n'est pas partagée avec des tiers.</p>
+    <p class="text-center mb-4">*Votre email est uniquement <span class="text-nowrap">utilisée pour vous contacter.</span><br>Elle n'est pas partagée avec des tiers.</p>
     <div class="flex justify-center gap-x-4 mb-32">
       <button type="submit" class="align-middle self-center justify-center h-12 px-4 bg-black text-white text-xl cardinal">Valider</button>
     </div>
