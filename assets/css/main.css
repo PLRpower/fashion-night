@@ -1,14 +1,14 @@
 @font-face {
     font-family: 'Cardinal';
-    src: url('https://fashion-night.vercel.app/fonts/Cardinal-regular.woff2') format("woff2"),
-    url('https://fashion-night.vercel.app/fonts/Cardinal-regular.woff2') format('woff2');
+    src: url('https://fashion-night.vercel.app/fonts/cardinal-regular.woff2') format("woff2"),
+    url('https://fashion-night.vercel.app/fonts/cardinal-regular.woff2') format('woff2');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'Cardinal';
-    src: url('https://fashion-night.vercel.app/fonts/Cardinal-medium.woff2') format("woff2"),
-    url('https://fashion-night.vercel.app/fonts/Cardinal-medium.woff2') format('woff2');
+    src: url('https://fashion-night.vercel.app/fonts/cardinal-medium.woff2') format("woff2"),
+    url('https://fashion-night.vercel.app/fonts/cardinal-medium.woff2') format('woff2');
     font-weight: 600;
 }
 
