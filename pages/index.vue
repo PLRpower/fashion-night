@@ -53,18 +53,21 @@ const { data } = await useFetch('https://api.tnptrading.fr/email-fashion-night')
   <h1 class="cardinal text-center text-5xl mt-32 mb-4">Lookbook à venir</h1>
   <p class="cardinal text-4xl text-center mb-32">Restez connectés</p>
 
-  <h2 class="text-center text-5xl mt-32 cardinal">Préreservez dès maintenant :</h2>
+  <h2 class="text-center text-5xl mt-32 cardinal">Préréservez dès maintenant :</h2>
   <form @submit.prevent="submitForm" v-show="!send">
-    <div class="flex justify-center mt-8 gap-x-4">
-      <input class="h-12 w-1/3 text-center text-2xl border-b-2 border-black mb-32 cardinal outline-none" type="email"
+    <div class="flex justify-center mt-8 gap-x-4 mb-4">
+      <input class="h-12 w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="email"
              placeholder="votre adresse email" id="email" name="email" v-model="email">
-      <button type="submit" class="h-12 w-1/6 bg-black text-white text-2xl mb-32 cardinal">Valider</button>
+    </div>
+    <p class="text-center mb-4">*Votre email est uniquement utilisée pour vous contacter.<br>Elle n'est pas partagée avec des tiers.</p>
+    <div class="flex justify-center gap-x-4 mb-32">
+      <button type="submit" class="align-middle self-center justify-center h-12 px-4 bg-black text-white text-xl cardinal">Valider</button>
     </div>
   </form>
   <p class="cardinal text-center text-green-800 text-2xl mb-32 mt-4" v-show="send">Votre préinscription est maintenant confirmée.</p>
 
   <div
-      class="fixed w-36 h-12 bg-black bottom-5 right-5 rounded-full flex items-center px-4 ease-in-out transition hover:scale-105 justify-evenly cursor-pointer"
+      class="fixed w-36 h-12 bg-black bottom-5 right-5 rounded-full flex items-center px-4 ease-in-out transition hover:scale-105 justify-evenly cursor-pointer z-50"
       @click="togglePlay">
     <img class="w-6 h-6" src="/img/play.svg" alt="Play" ref="play" v-show="!isPlaying">
     <img class="w-6 h-6" src="/img/pause.svg" alt="Pause" ref="pause" v-show="isPlaying">
