@@ -44,7 +44,7 @@ const { data } = await useFetch('https://api.tnptrading.fr/email-fashion-night')
   <h1 class="text-end me-6 text-6xl lg:text-8xl mt-8 cardinal">the fashion night</h1>
   <div class="flex justify-center mt-16">
     <div class="bg-black movie">
-      <video class="w-full h-full" src="/img/video.mp4" autoplay muted loop></video>
+      <video class="w-full h-full" src="/img/video.mp4" autoplay muted loop playsinline></video>
     </div>
     <nuxt-img class="z-10 w-11/12 lg:w-2/3" src="/img/ecran.webp"></nuxt-img>
   </div>
