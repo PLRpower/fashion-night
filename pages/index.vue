@@ -2,53 +2,76 @@
 import { ref, onMounted } from 'vue';
 
 // Références aux éléments du DOM
-const audio = ref(null); // Référence à l'élément audio
-const play = ref(null); // Référence au bouton play
-const pause = ref(null); // Référence au bouton pause
-const video = ref(null); // Référence à l'élément vidéo
+const audio = ref(null);
+const video = ref(null);
 
-// État de lecture
+// État de lecture audio
 const isPlaying = ref(false);
 
 // Fonction pour basculer entre lecture et pause
 const togglePlay = () => {
+  if (!audio.value) return;
+
   isPlaying.value = !isPlaying.value;
-  if (isPlaying.value) {
-    audio.value.play();
-  } else {
-    audio.value.pause();
-  }
+  isPlaying.value ? audio.value.play() : audio.value.pause();
 };
 
+// État et champs du formulaire
 const send = ref(false);
+const sendDescription = ref(false);
 const email = ref('');
+const description = ref('');
+const nom = ref('');
+const prenom = ref('');
 
-// Fonction pour soumettre le formulaire
-async function submitForm() {
-  await $fetch('https://api.tnptrading.fr/email-fashion-night', {
-    method: 'POST',
-    body: {
-      email: email.value
-    }
-  });
-  send.value = true;
-}
-
-// Utilisation de useFetch (si nécessaire)
-const { data } = await useFetch('https://api.tnptrading.fr/email-fashion-night');
-
-// Fonction pour vérifier et démarrer la lecture de la vidéo
-const playVideoIfNotPlaying = () => {
-  if (video.value && video.value.paused) {
-    video.value.play();
+// Fonction pour ajuster la hauteur de la zone de texte
+const adjustHeight = () => {
+  if (description.value) {
+    description.value.style.height = "46px"; // Réinitialise pour recalculer
+    description.value.style.height = description.value.scrollHeight + "px";
   }
 };
 
-// Lancer la vidéo à la fin du chargement
-onMounted(() => {
-  playVideoIfNotPlaying();
-});
+// Soumission du formulaire avec gestion des erreurs
+const submitForm = async () => {
+  try {
+    await $fetch('https://api.tnptrading.fr/email-fashion-night', {
+      method: 'POST',
+      body: { email: email.value }
+    });
+    send.value = true;
+  } catch (error) {
+    console.error('Erreur lors de l’envoi du formulaire:', error);
+  }
+};
+
+const submitDescription = async () => {
+  try {
+    await $fetch('https://api.tnptrading.fr/description-fashion-night', {
+      method: 'POST',
+      body: {
+        description: description.value,
+        nom: nom.value,
+        prenom: prenom.value
+      }
+    });
+    sendDescription.value = true;
+  } catch (error) {
+    console.error('Erreur lors de l’envoi du formulaire:', error);
+  }
+};
+
+// Fonction pour démarrer la vidéo si elle est en pause
+const playVideoIfNotPlaying = () => {
+  if (video.value?.paused) {
+    video.value.play().catch(err => console.warn('Lecture vidéo bloquée:', err));
+  }
+};
+
+// Exécuter une seule fois après le montage du composant
+onMounted(playVideoIfNotPlaying);
 </script>
+
 
 <template>
   <h2 class="ms-6 text-4xl lg:text-6xl mt-16 cardinal">Strasbourg 2025</h2>
@@ -153,6 +176,30 @@ onMounted(() => {
   </form>
   <p class="cardinal text-center text-green-800 text-2xl mb-32 mt-4" v-show="send">Votre préinscription est maintenant confirmée.</p>
 
+  <h2 class="text-center text-4xl lg:text-5xl mx-2 mt-32 cardinal">Description de votre tenue :</h2>
+  <p class="text-center mt-4">Décrivez votre tenue pour la soirée Fifty and Fabulous, la fashion night de Strasbourg 2025.</p>
+  <form @submit.prevent="submitDescription" v-show="!sendDescription">
+    <div class="flex justify-center mt-8 gap-x-4 mb-4">
+      <input class="h-12 w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="text" placeholder="votre nom" id="nom" name="nom" v-model="nom" autocomplete="family-name">
+    </div>
+    <div class="flex justify-center mt-8 gap-x-4 mb-4">
+      <input class="h-12 w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="text" placeholder="votre prénom" id="prenom" name="prenom" v-model="prenom" autocomplete="given-name">
+    </div>
+    <div class="flex justify-center mt-8 gap-x-4 mb-4">
+    <textarea
+        @input="adjustHeight"
+        v-model="description"
+        class=" w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 outline-none focus:border-black cardinal"
+        placeholder="Description de votre tenue"
+    >
+    </textarea>
+    </div>
+    <div class="flex justify-center gap-x-4 mb-32">
+      <button type="submit" class="align-middle self-center justify-center h-12 px-4 bg-black text-white text-xl cardinal">Valider</button>
+    </div>
+  </form>
+  <p class="cardinal text-center text-green-800 text-2xl mb-32 mt-4" v-show="sendDescription">Votre description à bien été envoyée.</p>
+
   <div
       class="fixed w-36 h-12 bg-black bottom-5 right-5 rounded-full flex items-center px-4 ease-in-out transition hover:scale-105 justify-evenly cursor-pointer z-50"
       @click="togglePlay">
@@ -162,7 +209,6 @@ onMounted(() => {
   </div>
 
   <audio class="fixed bottom-0 right-0" src="/music.mp3" ref="audio"></audio>
-
 </template>
 
 <style scoped>
