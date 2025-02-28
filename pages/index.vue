@@ -177,7 +177,7 @@ onMounted(playVideoIfNotPlaying);
   <p class="cardinal text-center text-green-800 text-2xl mb-32 mt-4" v-show="send">Votre préinscription est maintenant confirmée.</p>
 
   <h2 class="text-center text-4xl lg:text-5xl mx-2 mt-32 cardinal">Description de votre tenue :</h2>
-  <p class="text-center mt-4">Décrivez votre tenue pour la soirée Fifty and Fabulous, la fashion night de Strasbourg 2025.</p>
+  <p class="text-center mt-4">Décrivez en quelques lignes la tenue que vous porterez lors de la soirée Fashion Night.</p>
   <form @submit.prevent="submitDescription" v-show="!sendDescription">
     <div class="flex justify-center mt-8 gap-x-4 mb-4">
       <input class="h-12 w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="text" placeholder="votre nom" id="nom" name="nom" v-model="nom" autocomplete="family-name">
