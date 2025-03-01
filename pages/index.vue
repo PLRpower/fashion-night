@@ -163,19 +163,6 @@ onMounted(playVideoIfNotPlaying);
 
   </div>
 
-  <h2 class="text-center text-4xl lg:text-5xl mx-2 mt-32 cardinal">Préréservez dès maintenant :</h2>
-  <form @submit.prevent="submitForm" v-show="!send">
-    <div class="flex justify-center mt-8 gap-x-4 mb-4">
-      <input class="h-12 w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 cardinal outline-none focus:border-black" type="email"
-             placeholder="votre adresse email" id="email" name="email" v-model="email">
-    </div>
-    <p class="text-center mb-4">*Votre email est uniquement <span class="text-nowrap">utilisé pour vous contacter.</span><br>Il n'est pas partagé avec des tiers.</p>
-    <div class="flex justify-center gap-x-4 mb-32">
-      <button type="submit" class="align-middle self-center justify-center h-12 px-4 bg-black text-white text-xl cardinal">Valider</button>
-    </div>
-  </form>
-  <p class="cardinal text-center text-green-800 text-2xl mb-32 mt-4" v-show="send">Votre préinscription est maintenant confirmée.</p>
-
   <h2 class="text-center text-4xl lg:text-5xl mx-2 mt-32 cardinal">Description de votre tenue :</h2>
   <p class="text-center mt-4">Décrivez en quelques lignes la tenue que vous porterez lors de la soirée Fashion Night.</p>
   <form @submit.prevent="submitDescription" v-show="!sendDescription">
@@ -189,7 +176,7 @@ onMounted(playVideoIfNotPlaying);
     <textarea
         @input="adjustHeight"
         v-model="description"
-        class=" w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 outline-none focus:border-black cardinal"
+        class=" w-64 lg:w-96 text-center text-xl border-b-2 border-gray-400 outline-none focus:border-black"
         placeholder="Description de votre tenue"
     >
     </textarea>
